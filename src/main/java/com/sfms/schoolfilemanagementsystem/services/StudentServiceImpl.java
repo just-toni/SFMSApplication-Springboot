@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentServices{
@@ -20,5 +21,9 @@ public class StudentServiceImpl implements StudentServices{
         student.setName(studentRegistrationDto.getStudentName());
         student.setDateOfBirth(LocalDate.parse(studentRegistrationDto.getDateOfBirth()));
         return studentRepository.save(student);
+    }
+
+    public Optional<Student> findByStudentId(Long studentId){
+        return studentRepository.findById(studentId);
     }
 }

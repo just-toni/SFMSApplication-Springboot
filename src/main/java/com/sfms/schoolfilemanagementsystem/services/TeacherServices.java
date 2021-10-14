@@ -1,5 +1,6 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
+import com.sfms.schoolfilemanagementsystem.dto.StudentRegistrationDto;
 import com.sfms.schoolfilemanagementsystem.model.Teacher;
 
 import java.util.List;

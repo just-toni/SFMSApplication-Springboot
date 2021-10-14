@@ -1,5 +1,6 @@
 package com.sfms.schoolfilemanagementsystem.web;
 
+import com.sfms.schoolfilemanagementsystem.dto.StudentRegistrationDto;
 import com.sfms.schoolfilemanagementsystem.model.Teacher;
 import com.sfms.schoolfilemanagementsystem.services.TeacherRegistrationDto;
 import com.sfms.schoolfilemanagementsystem.services.TeacherServices;
@@ -28,5 +29,6 @@ public class TeacherController {
     public List<Teacher> findAll() {
         return teacherServices.findAll();
     }
+
 
 }
