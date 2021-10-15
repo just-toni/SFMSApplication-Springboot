@@ -23,7 +23,7 @@ public class StudentServiceImpl implements StudentServices{
     Student student1 = new Student();
 
    @Autowired
-    private StudentRepository studentRepository;
+   private StudentRepository studentRepository;
 
    @Autowired
    private SubjectServices subjectServices;
@@ -82,13 +82,23 @@ public class StudentServiceImpl implements StudentServices{
     }
 
     @Override
-    public Optional<Subject> findAllSubjectsForStudentBy(Long studentId) {
-        return
+    public List<Subject> findAllSubjectsForStudentBy(Long studentId) {
+        return subjectServices.findAll().stream().filter(subject -> {
+            for(Student student: subject.getStudents()){
+                return student.getStudentId().equals(studentId);
+            }
+            return false;
+        }).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Class> findAllClassesForStudentBy(Long studentId) {
-        return classRepository.findById(studentId);
+    public List<Class> findAllClassesForStudentBy(Long studentId) {
+        return classService.findAll().stream().filter(class1 -> {
+            for(Student student: class1.getStudents()){
+                return student.getStudentId().equals(studentId);
+            }
+            return false;
+        }).collect(Collectors.toList());
     }
 
     @Override

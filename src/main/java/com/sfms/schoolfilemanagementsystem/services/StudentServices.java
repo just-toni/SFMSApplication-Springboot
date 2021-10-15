@@ -17,7 +17,7 @@ public interface StudentServices {
     List<Student> findAll();
     Student registerSubjectWith(StudentRegistrationDto studentRegistrationDto, SubjectRegistrationDto subjectRegistrationDto);
     Student registerClassWith(StudentRegistrationDto studentRegistrationDto, ClassRegistrationDto classRegistrationDto);
-    Optional<Subject> findAllSubjectsForStudentBy(Long studentId);
-    Optional<Class> findAllClassesForStudentBy(Long studentId);
+    List<Subject> findAllSubjectsForStudentBy(Long studentId);
+    List<Class> findAllClassesForStudentBy(Long studentId);
     List<Teacher> findAllTeachersForStudentBy(Long studentId);
 }
