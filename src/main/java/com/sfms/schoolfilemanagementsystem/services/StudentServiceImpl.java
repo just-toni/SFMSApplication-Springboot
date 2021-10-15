@@ -5,18 +5,34 @@ import com.sfms.schoolfilemanagementsystem.model.Class;
 import com.sfms.schoolfilemanagementsystem.model.Student;
 import com.sfms.schoolfilemanagementsystem.model.Subject;
 import com.sfms.schoolfilemanagementsystem.model.Teacher;
+import com.sfms.schoolfilemanagementsystem.repository.ClassRepository;
 import com.sfms.schoolfilemanagementsystem.repository.StudentRepository;
+import com.sfms.schoolfilemanagementsystem.repository.SubjectRepository;
+import com.sfms.schoolfilemanagementsystem.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentServices{
+
+    Student student1 = new Student();
+
    @Autowired
     private StudentRepository studentRepository;
+
+   @Autowired
+   private SubjectServices subjectServices;
+
+   @Autowired
+   private ClassService classService;
+
+   @Autowired
+   private TeacherServices teacherServices;
 
     @Override
     public Student registerWith(StudentRegistrationDto studentRegistrationDto) {
@@ -44,31 +60,45 @@ public class StudentServiceImpl implements StudentServices{
     @Override
     public Student registerSubjectWith(StudentRegistrationDto studentRegistrationDto, SubjectRegistrationDto subjectRegistrationDto) {
         Subject subject1 = new Subject();
-        Student student1 = new Student();
         subject1.setSubjectName(subjectRegistrationDto.getSubjectName());
         subject1.setSubjectDescription(subjectRegistrationDto.getSubjectDescription());
         student1.setName(studentRegistrationDto.getStudentName());
         student1.setDateOfBirth(LocalDate.parse(studentRegistrationDto.getDateOfBirth()));
+        student1.getSubject().add(subject1);
+        subject1.getStudents().add(student1);
+        return student1;
     }
 
     @Override
-    public Class registerClassWith(StudentRegistrationDto studentRegistrationDto) {
-        return null;
+    public Student registerClassWith(StudentRegistrationDto studentRegistrationDto, ClassRegistrationDto classRegistrationDto) {
+        Class class1 = new Class();
+        class1.setClassName(classRegistrationDto.getClassName());
+        class1.setClassType(classRegistrationDto.getClassType());
+        student1.setName(studentRegistrationDto.getStudentName());
+        student1.setDateOfBirth(LocalDate.parse(studentRegistrationDto.getDateOfBirth()));
+        student1.setClasses(class1);
+        class1.getStudents().add(student1);
+        return student1;
     }
 
     @Override
-    public List<Subject> findAllSubjectsForStudentBy(Long studentId) {
-        return null;
+    public Optional<Subject> findAllSubjectsForStudentBy(Long studentId) {
+        return
     }
 
     @Override
-    public List<Class> findAllClassesForStudentBy(Long studentId) {
-        return null;
+    public Optional<Class> findAllClassesForStudentBy(Long studentId) {
+        return classRepository.findById(studentId);
     }
 
     @Override
     public List<Teacher> findAllTeachersForStudentBy(Long studentId) {
-        return null;
+        return teacherServices.findAll().stream().filter(teacher -> {
+            for(Student student: teacher.getStudents()){
+                return student.getStudentId().equals(studentId);
+            }
+            return false;
+        }).collect(Collectors.toList());
     }
 
 

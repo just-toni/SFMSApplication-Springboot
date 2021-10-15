@@ -15,9 +15,9 @@ public interface StudentServices {
     Optional<Student> findByStudentId(Long studentId);
     void deleteStudentBy(Long id);
     List<Student> findAll();
-    Subject registerSubjectWith(StudentRegistrationDto studentRegistrationDto);
-    Class registerClassWith(StudentRegistrationDto studentRegistrationDto);
-    List<Subject> findAllSubjectsForStudentBy(Long studentId);
-    List<Class> findAllClassesForStudentBy(Long studentId);
+    Student registerSubjectWith(StudentRegistrationDto studentRegistrationDto, SubjectRegistrationDto subjectRegistrationDto);
+    Student registerClassWith(StudentRegistrationDto studentRegistrationDto, ClassRegistrationDto classRegistrationDto);
+    Optional<Subject> findAllSubjectsForStudentBy(Long studentId);
+    Optional<Class> findAllClassesForStudentBy(Long studentId);
     List<Teacher> findAllTeachersForStudentBy(Long studentId);
 }
