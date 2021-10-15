@@ -11,4 +11,5 @@ public interface SubjectServices {
     Optional<Subject> findBySubjectId(Long studentId);
     void deleteSubjectBy(Long id);
     List<Subject> findAll();
+
 }

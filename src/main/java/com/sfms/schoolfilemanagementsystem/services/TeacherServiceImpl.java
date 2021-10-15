@@ -5,16 +5,14 @@ import com.sfms.schoolfilemanagementsystem.model.Class;
 import com.sfms.schoolfilemanagementsystem.model.Student;
 import com.sfms.schoolfilemanagementsystem.model.Subject;
 import com.sfms.schoolfilemanagementsystem.model.Teacher;
-import com.sfms.schoolfilemanagementsystem.repository.StudentRepository;
 import com.sfms.schoolfilemanagementsystem.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServiceImpl implements TeacherServices{
@@ -22,6 +20,15 @@ public class TeacherServiceImpl implements TeacherServices{
 
     @Autowired
     private TeacherRepository teacherRepository;
+
+    @Autowired
+    private StudentServices studentServices;
+
+    @Autowired
+    private ClassService classService;
+
+    @Autowired
+    private SubjectServices subjectServices;
 
     @Override
     public Teacher registerWith(TeacherRegistrationDto teacherRegistrationDto){
@@ -78,17 +85,32 @@ public class TeacherServiceImpl implements TeacherServices{
 
     @Override
     public List<Student> findAllStudentsForTeacherBy(Long teacherId) {
-        return null;
+        return studentServices.findAll().stream().filter(student -> {
+            for(Teacher teacher: student.getTeachers()){
+                return teacher.getTeacherId().equals(teacherId);
+            }
+            return false;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public List<Subject> findAllSubjectsForTeacherBy(Long teacherId) {
-        return null;
+        return subjectServices.findAll().stream().filter(subject -> {
+            for(Teacher teacher : subject.getTeacher()){
+                return teacher.getTeacherId().equals(teacherId);
+            }
+            return false;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public List<Class> findAllClassesForTeacherBy(Long teacherId) {
-        return null;
+        return classService.findAll().stream().filter(class1 -> {
+            for(Teacher teacher : class1.getTeachers()){
+                return teacher.getTeacherId().equals(teacherId);
+            }
+            return false;
+        }).collect(Collectors.toList());
     }
 
 
