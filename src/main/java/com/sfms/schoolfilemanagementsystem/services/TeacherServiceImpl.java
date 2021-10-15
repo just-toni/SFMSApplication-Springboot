@@ -18,19 +18,13 @@ import java.util.Set;
 
 @Service
 public class TeacherServiceImpl implements TeacherServices{
+    Teacher teacher = new Teacher();
 
     @Autowired
     private TeacherRepository teacherRepository;
 
-//    @Autowired
-//    private StudentRepository studentRepository;
-//
-//    @Autowired
-//    private StudentServices studentServices;
-
     @Override
     public Teacher registerWith(TeacherRegistrationDto teacherRegistrationDto){
-        Teacher teacher = new Teacher();
         System.out.println(teacherRegistrationDto.getTeacherName());
         teacher.setName(teacherRegistrationDto.getTeacherName());
         teacher.setDateOfBirth(LocalDate.parse(teacherRegistrationDto.getDateOfBirth()));
@@ -50,18 +44,36 @@ public class TeacherServiceImpl implements TeacherServices{
     }
 
     @Override
-    public Student addStudent(Long teacherId, Long studentId) {
-        return null;
+    public Teacher assignStudentToTeacherWith(StudentRegistrationDto studentRegistrationDto, TeacherRegistrationDto teacherRegistrationDto) {
+        Student student = new Student();
+        student.setName(studentRegistrationDto.getStudentName());
+        student.setDateOfBirth(LocalDate.parse(studentRegistrationDto.getDateOfBirth()));
+        teacher.setName(teacherRegistrationDto.getTeacherName());
+        teacher.setDateOfBirth(LocalDate.parse(teacherRegistrationDto.getDateOfBirth()));
+        teacher.getStudents().add(student);
+        return teacherRepository.save(teacher);
     }
 
     @Override
-    public Subject assignSubject(Long teacherId, Long subjectId) {
-        return null;
+    public Teacher assignSubjectToTeacherWith(SubjectRegistrationDto subjectRegistrationDto, TeacherRegistrationDto teacherRegistrationDto) {
+        Subject subject = new Subject();
+        subject.setSubjectName(subjectRegistrationDto.getSubjectName());
+        subject.setSubjectDescription(subjectRegistrationDto.getSubjectDescription());
+        teacher.setName(teacherRegistrationDto.getTeacherName());
+        teacher.setDateOfBirth(LocalDate.parse(teacherRegistrationDto.getDateOfBirth()));
+        teacher.getSubject().add(subject);
+        return teacherRepository.save(teacher);
     }
 
     @Override
-    public Class assignTeacher(Long teacherId, Long classId) {
-        return null;
+    public Teacher assignClassToTeacherWith(ClassRegistrationDto classRegistrationDto, TeacherRegistrationDto teacherRegistrationDto) {
+        Class class1 = new Class();
+        class1.setClassName(classRegistrationDto.getClassName());
+        class1.setClassType(classRegistrationDto.getClassType());
+        teacher.setName(teacherRegistrationDto.getTeacherName());
+        teacher.setDateOfBirth(LocalDate.parse(teacherRegistrationDto.getDateOfBirth()));
+        teacher.getClasses().add(class1);
+        return teacherRepository.save(teacher);
     }
 
     @Override
@@ -79,26 +91,5 @@ public class TeacherServiceImpl implements TeacherServices{
         return null;
     }
 
-//    Set<Student> students= new HashSet<>();
-//    public void addStudents(Student student){
-//        students.add(student);
-//    }
-
-//    public void assignStudent(Long teacherId, Long studentId){
-//        Optional<Teacher> teacher = findByTeacherId(teacherId);
-//        Optional<Student> student = studentServices.findByStudentId(studentId);
-//        if(teacher.isPresent()){
-//            Student student1 = new Student();
-//            if(student.isPresent()){
-//                student1.getName();
-//                student1.getStudentId();
-//                student1.getDateOfBirth();
-//                addStudents(student1);
-//                studentRepository.save(student1);
-//            }
-//            Teacher teacher1 = new Teacher();
-//            teacher1.setStudents(students);
-//        }
-//    }
 
 }

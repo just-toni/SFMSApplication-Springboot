@@ -15,9 +15,9 @@ public interface TeacherServices {
     void deleteBy(Long id);
     List<Teacher> findAll();
     Optional<Teacher> findTeacherById(Long teacherId);
-    Student addStudent(Long teacherId, Long studentId);
-    Subject assignSubject(Long teacherId, Long subjectId);
-    Class assignTeacher (Long teacherId, Long classId);
+    Teacher assignStudentToTeacherWith(StudentRegistrationDto studentRegistrationDto, TeacherRegistrationDto teacherRegistrationDto);
+    Teacher assignSubjectToTeacherWith(SubjectRegistrationDto subjectRegistrationDto, TeacherRegistrationDto teacherRegistrationDto);
+    Teacher assignClassToTeacherWith (ClassRegistrationDto classRegistrationDto, TeacherRegistrationDto teacherRegistrationDto);
     List<Student> findAllStudentsForTeacherBy(Long teacherId);
     List<Subject> findAllSubjectsForTeacherBy(Long teacherId);
     List<Class> findAllClassesForTeacherBy(Long teacherId);
