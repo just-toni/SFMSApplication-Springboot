@@ -1,6 +1,6 @@
 package com.sfms.schoolfilemanagementsystem.web;
 
-import com.sfms.schoolfilemanagementsystem.dto.StudentRegistrationDto;
+import com.sfms.schoolfilemanagementsystem.services.StudentRegistrationDto;
 import com.sfms.schoolfilemanagementsystem.model.Student;
 import com.sfms.schoolfilemanagementsystem.services.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
