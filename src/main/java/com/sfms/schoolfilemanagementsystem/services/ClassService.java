@@ -12,4 +12,5 @@ public interface ClassService {
     Optional<Class> findByClassId(Long classId);
     void deleteClassBy(Long classId);
     List<Class> findAll();
+
 }
