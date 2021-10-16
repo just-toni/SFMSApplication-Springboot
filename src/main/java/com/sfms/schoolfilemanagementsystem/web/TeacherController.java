@@ -34,8 +34,8 @@ public class TeacherController {
     }
 
     @GetMapping("teacher/find/{id}")
-    public Optional<Teacher> findTeacherById(@PathVariable Long teacherId){
-        return teacherServices.findTeacherById(teacherId);
+    public Optional<Teacher> findTeacherById(@PathVariable Long id){
+        return teacherServices.findTeacherById(id);
     }
 
     @PutMapping("teacher/assignStudent")
@@ -59,17 +59,17 @@ public class TeacherController {
         return teacherServices.assignClassToTeacherWith(classRegistrationDto, teacherRegistrationDto);
     }
 
-    @GetMapping("teacher/getStudent")
+    @GetMapping("teacher/getStudent/{teacherId}")
     public List<Student> findAllStudentsForTeacherBy(@PathVariable Long teacherId){
         return teacherServices.findAllStudentsForTeacherBy(teacherId);
     }
 
-    @GetMapping ("teacher/getSubject")
+    @GetMapping ("teacher/getSubject/{teacherId}")
     public List<Subject> findAllSubjectsForTeacherB(@PathVariable Long teacherId){
         return teacherServices.findAllSubjectsForTeacherBy(teacherId);
     }
 
-    @GetMapping("teacher/getClass")
+    @GetMapping("teacher/getClass/{teacherId}")
     public List<Class> findAllClassesForTeacherBy(@PathVariable Long teacherId){
         return teacherServices.findAllClassesForTeacherBy(teacherId);
     }
