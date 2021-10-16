@@ -1,16 +1,13 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
-import com.sfms.schoolfilemanagementsystem.dto.StudentRegistrationDto;
 import com.sfms.schoolfilemanagementsystem.model.Class;
 import com.sfms.schoolfilemanagementsystem.model.Student;
 import com.sfms.schoolfilemanagementsystem.model.Subject;
 import com.sfms.schoolfilemanagementsystem.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClassServiceImpl implements ClassService{
