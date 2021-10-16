@@ -81,10 +81,12 @@ public class SubjectServicesImpl implements SubjectServices{
 
     @Override
     public void deleteStudentFromSubjectBy(Long studentId, Long subjectId) {
-        List <Student> result = findAllStudentsBy(subjectId);
-        studentServices.findByStudentId(studentId);
-        if(studentId == result){
-            studentServices.deleteStudentBy(studentId);
+        Optional<Subject> subjectOptional = subjectRepository.findById(subjectId);
+        if(subjectOptional.isPresent()){
+            Student student = new Student();
+            if(student.getStudentId().equals(studentId)){
+                studentServices.deleteStudentBy(studentId);
+            }
         }
     }
 
