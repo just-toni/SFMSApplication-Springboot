@@ -1,14 +1,10 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
-import com.sfms.schoolfilemanagementsystem.dto.StudentRegistrationDto;
 import com.sfms.schoolfilemanagementsystem.model.Class;
 import com.sfms.schoolfilemanagementsystem.model.Student;
 import com.sfms.schoolfilemanagementsystem.model.Subject;
 import com.sfms.schoolfilemanagementsystem.model.Teacher;
-import com.sfms.schoolfilemanagementsystem.repository.ClassRepository;
 import com.sfms.schoolfilemanagementsystem.repository.StudentRepository;
-import com.sfms.schoolfilemanagementsystem.repository.SubjectRepository;
-import com.sfms.schoolfilemanagementsystem.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
