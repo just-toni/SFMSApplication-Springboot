@@ -1,10 +1,11 @@
 package com.sfms.schoolfilemanagementsystem.web;
 
 import com.sfms.schoolfilemanagementsystem.model.Class;
+import com.sfms.schoolfilemanagementsystem.model.Student;
 import com.sfms.schoolfilemanagementsystem.model.Subject;
+import com.sfms.schoolfilemanagementsystem.model.Teacher;
 import com.sfms.schoolfilemanagementsystem.services.ClassRegistrationDto;
 import com.sfms.schoolfilemanagementsystem.services.ClassService;
-import com.sfms.schoolfilemanagementsystem.services.SubjectRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +36,15 @@ public class ClassController {
     @DeleteMapping("class/delete/{classId}")
     public void deleteClassBy(@PathVariable Long classId){
         classService.deleteClassBy(classId);
+    }
+
+    @GetMapping("subject/findAllStudentsForClassWith/{classId}")
+    public List<Student> findAllStudentBy(@PathVariable Long classId){
+        return classService.findAllStudentsInThisClassWith(classId);
+    }
+
+    @GetMapping("subject/findAllSubjectsForClassWith/{classId}")
+    public List<Subject> findAllClassesBy(@PathVariable Long classId){
+        return classService.findAllSubjectsForThisClassWith(classId);
     }
 }
