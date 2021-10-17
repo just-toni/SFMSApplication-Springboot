@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SubjectServices {
-    Subject registerWith(SubjectRegistrationDto studentRegistrationDto);
+    Subject registerWith(SubjectRegistrationDto subjectRegistrationDto);
     Optional<Subject> findBySubjectId(Long subjectId);
     void deleteSubjectBy(Long id);
     List<Subject> findAll();
