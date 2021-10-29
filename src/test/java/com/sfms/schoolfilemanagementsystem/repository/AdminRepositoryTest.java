@@ -1,7 +1,6 @@
 package com.sfms.schoolfilemanagementsystem.repository;
 
-import com.sfms.schoolfilemanagementsystem.model.Admin;
-import com.sfms.schoolfilemanagementsystem.model.Parent;
+import com.sfms.schoolfilemanagementsystem.data.model.Admin;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +17,7 @@ class AdminRepositoryTest {
     AdminRepository adminRepository;
 
     @Test
-    void createAdmin(){
+    void createAdmin() {
         Admin admin1 = new Admin("Jack Frost");
         Admin admin2 = new Admin("Meghan Markle");
         Admin admin3 = new Admin("Johann Yale");
@@ -35,9 +34,9 @@ class AdminRepositoryTest {
     }
 
     @Test
-    void testThatParentCanBeUpdatedById(){
+    void testThatParentCanBeUpdatedById() {
         Optional<Admin> optionalAdmin = adminRepository.findById(1L);
-        if(optionalAdmin.isPresent()){
+        if (optionalAdmin.isPresent()) {
             Admin admin = optionalAdmin.get();
             admin.setName("Matthew Ruckerberg");
             adminRepository.save(admin);
@@ -46,9 +45,9 @@ class AdminRepositoryTest {
     }
 
     @Test
-    void testThatParentCanBeDeletedById(){
+    void testThatParentCanBeDeletedById() {
         Optional<Admin> optionalAdmin = adminRepository.findById(5L);
-        if(optionalAdmin.isPresent()){
+        if (optionalAdmin.isPresent()) {
             Admin admin = optionalAdmin.get();
             adminRepository.delete(admin);
             assertEquals(4, adminRepository.count());
