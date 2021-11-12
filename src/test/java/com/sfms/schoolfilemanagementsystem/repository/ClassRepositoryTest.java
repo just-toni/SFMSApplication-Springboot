@@ -1,11 +1,11 @@
 package com.sfms.schoolfilemanagementsystem.repository;
 
-import com.sfms.schoolfilemanagementsystem.model.ClassType;
-import com.sfms.schoolfilemanagementsystem.model.Subject;
+import com.sfms.schoolfilemanagementsystem.data.model.ClassType;
+import com.sfms.schoolfilemanagementsystem.data.repository.ClassRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.sfms.schoolfilemanagementsystem.model.Class;
+import com.sfms.schoolfilemanagementsystem.data.model.Class;
 
 import java.util.Optional;
 
@@ -18,7 +18,7 @@ class ClassRepositoryTest {
     ClassRepository classRepository;
 
     @Test
-    void createClasses(){
+    void createClasses() {
         Class class1 = new Class("Crystal", ClassType.YEAR4);
         Class class2 = new Class("Glueya", ClassType.YEAR11);
         Class class3 = new Class("Mayers", ClassType.YEAR7);
@@ -31,9 +31,9 @@ class ClassRepositoryTest {
     }
 
     @Test
-    void testThatClassCanBeUpdatedById(){
+    void testThatClassCanBeUpdatedById() {
         Optional<Class> optionalClass = classRepository.findById(4L);
-        if(optionalClass.isPresent()){
+        if (optionalClass.isPresent()) {
             Class class1 = optionalClass.get();
             class1.setClassName("Tyherd");
             classRepository.save(class1);
@@ -42,9 +42,9 @@ class ClassRepositoryTest {
     }
 
     @Test
-    void testThatClassCanBeDeletedById(){
+    void testThatClassCanBeDeletedById() {
         Optional<Class> optionalClass = classRepository.findById(4L);
-        if(optionalClass.isPresent()){
+        if (optionalClass.isPresent()) {
             Class class1 = optionalClass.get();
             classRepository.delete(class1);
             assertEquals(3, classRepository.count());

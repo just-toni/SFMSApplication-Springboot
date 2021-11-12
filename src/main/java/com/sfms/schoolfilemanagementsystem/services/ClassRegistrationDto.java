@@ -1,6 +1,6 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
-import com.sfms.schoolfilemanagementsystem.model.ClassType;
+import com.sfms.schoolfilemanagementsystem.data.model.ClassType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

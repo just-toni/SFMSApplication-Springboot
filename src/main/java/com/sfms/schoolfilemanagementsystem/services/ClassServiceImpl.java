@@ -1,16 +1,16 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
-import com.sfms.schoolfilemanagementsystem.model.Class;
-import com.sfms.schoolfilemanagementsystem.model.Student;
-import com.sfms.schoolfilemanagementsystem.model.Subject;
-import com.sfms.schoolfilemanagementsystem.repository.ClassRepository;
+import com.sfms.schoolfilemanagementsystem.data.model.Class;
+import com.sfms.schoolfilemanagementsystem.data.model.Student;
+import com.sfms.schoolfilemanagementsystem.data.model.Subject;
+import com.sfms.schoolfilemanagementsystem.data.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ClassServiceImpl implements ClassService{
+public class ClassServiceImpl implements ClassService {
 
     @Autowired
     ClassRepository classRepository;
@@ -50,7 +50,7 @@ public class ClassServiceImpl implements ClassService{
 //        class1.getClassId().equals(classId);
 //        return class1.getStudents();
         Optional<Class> optionalClass = classRepository.findById(classId);
-        if(optionalClass.isPresent()){
+        if (optionalClass.isPresent()) {
             return (List<Student>) optionalClass.get().getStudents();
         }
         return null;
@@ -59,7 +59,7 @@ public class ClassServiceImpl implements ClassService{
     @Override
     public List<Subject> findAllSubjectsForThisClassWith(Long classId) {
         return subjectServices.findAll().stream().filter(subject -> {
-            for(Class class1 : subject.getClasses()){
+            for (Class class1 : subject.getClasses()) {
                 return class1.getClassId().equals(classId);
             }
             return false;
