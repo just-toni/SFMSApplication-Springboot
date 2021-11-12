@@ -1,4 +1,4 @@
-package com.sfms.schoolfilemanagementsystem.model;
+package com.sfms.schoolfilemanagementsystem.data.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

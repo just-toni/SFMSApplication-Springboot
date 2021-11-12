@@ -1,6 +1,7 @@
 package com.sfms.schoolfilemanagementsystem.repository;
 
-import com.sfms.schoolfilemanagementsystem.model.Student;
+import com.sfms.schoolfilemanagementsystem.data.model.Student;
+import com.sfms.schoolfilemanagementsystem.data.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class StudentRepositoryTest {
@@ -17,7 +18,7 @@ class StudentRepositoryTest {
     StudentRepository studentRepository;
 
     @Test
-    void createStudents(){
+    void createStudents() {
         LocalDate date1 = LocalDate.of(2003, 3, 1);
         Student student1 = new Student("Jasmine Reelwood", date1);
         LocalDate date2 = LocalDate.of(2003, 12, 3);
@@ -36,14 +37,14 @@ class StudentRepositoryTest {
 
 
     @Test
-    void testThatAStudentsHaveBeCreated(){
+    void testThatAStudentsHaveBeCreated() {
         assertEquals(4, studentRepository.count());
     }
 
     @Test
-    void testThatStudentCanBeUpdatedById(){
+    void testThatStudentCanBeUpdatedById() {
         Optional<Student> optionalStudent = studentRepository.findById(3L);
-        if(optionalStudent.isPresent()){
+        if (optionalStudent.isPresent()) {
             Student student = optionalStudent.get();
             student.setName("Tayna James");
             studentRepository.save(student);

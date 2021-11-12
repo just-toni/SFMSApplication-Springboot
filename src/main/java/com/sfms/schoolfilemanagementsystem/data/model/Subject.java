@@ -1,4 +1,4 @@
-package com.sfms.schoolfilemanagementsystem.model;
+package com.sfms.schoolfilemanagementsystem.data.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,5 +27,5 @@ public class Subject {
     @ManyToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private Set<Teacher> teacher;
     @ManyToMany(mappedBy = "subject", fetch = FetchType.LAZY)
-    private Set<Class> classes;
+    private Set<java.lang.Class> classes;
 }

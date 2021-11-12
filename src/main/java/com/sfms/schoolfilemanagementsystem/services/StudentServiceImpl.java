@@ -1,10 +1,10 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
-import com.sfms.schoolfilemanagementsystem.model.Class;
-import com.sfms.schoolfilemanagementsystem.model.Student;
-import com.sfms.schoolfilemanagementsystem.model.Subject;
-import com.sfms.schoolfilemanagementsystem.model.Teacher;
-import com.sfms.schoolfilemanagementsystem.repository.StudentRepository;
+import com.sfms.schoolfilemanagementsystem.data.model.Class;
+import com.sfms.schoolfilemanagementsystem.data.model.Student;
+import com.sfms.schoolfilemanagementsystem.data.model.Subject;
+import com.sfms.schoolfilemanagementsystem.data.model.Teacher;
+import com.sfms.schoolfilemanagementsystem.data.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +14,21 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class StudentServiceImpl implements StudentServices{
+public class StudentServiceImpl implements StudentServices {
 
     Student student1 = new Student();
 
-   @Autowired
-   private StudentRepository studentRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
-   @Autowired
-   private SubjectServices subjectServices;
+    @Autowired
+    private SubjectServices subjectServices;
 
-   @Autowired
-   private ClassService classService;
+    @Autowired
+    private ClassService classService;
 
-   @Autowired
-   private TeacherServices teacherServices;
+    @Autowired
+    private TeacherServices teacherServices;
 
     @Override
     public Student registerWith(StudentRegistrationDto studentRegistrationDto) {
@@ -40,11 +40,11 @@ public class StudentServiceImpl implements StudentServices{
     }
 
     @Override
-    public Optional<Student> findByStudentId(Long studentId){
+    public Optional<Student> findByStudentId(Long studentId) {
         return studentRepository.findById(studentId);
     }
 
-    public void deleteStudentBy(Long studentId){
+    public void deleteStudentBy(Long studentId) {
         studentRepository.deleteById(studentId);
     }
 
@@ -80,7 +80,7 @@ public class StudentServiceImpl implements StudentServices{
     @Override
     public List<Subject> findAllSubjectsForStudentBy(Long studentId) {
         return subjectServices.findAll().stream().filter(subject -> {
-            for(Student student: subject.getStudents()){
+            for (Student student : subject.getStudents()) {
                 return student.getStudentId().equals(studentId);
             }
             return false;
@@ -90,7 +90,7 @@ public class StudentServiceImpl implements StudentServices{
     @Override
     public List<Class> findAllClassesForStudentBy(Long studentId) {
         return classService.findAll().stream().filter(class1 -> {
-            for(Student student: class1.getStudents()){
+            for (Student student : class1.getStudents()) {
                 return student.getStudentId().equals(studentId);
             }
             return false;
@@ -100,7 +100,7 @@ public class StudentServiceImpl implements StudentServices{
     @Override
     public List<Teacher> findAllTeachersForStudentBy(Long studentId) {
         return teacherServices.findAll().stream().filter(teacher -> {
-            for(Student student: teacher.getStudents()){
+            for (Student student : teacher.getStudents()) {
                 return student.getStudentId().equals(studentId);
             }
             return false;

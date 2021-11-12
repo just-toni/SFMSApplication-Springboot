@@ -1,17 +1,17 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
-import com.sfms.schoolfilemanagementsystem.model.Class;
-import com.sfms.schoolfilemanagementsystem.model.Student;
-import com.sfms.schoolfilemanagementsystem.model.Subject;
-import com.sfms.schoolfilemanagementsystem.model.Teacher;
-import com.sfms.schoolfilemanagementsystem.repository.SubjectRepository;
+import com.sfms.schoolfilemanagementsystem.data.model.Class;
+import com.sfms.schoolfilemanagementsystem.data.model.Student;
+import com.sfms.schoolfilemanagementsystem.data.model.Subject;
+import com.sfms.schoolfilemanagementsystem.data.model.Teacher;
+import com.sfms.schoolfilemanagementsystem.data.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class SubjectServicesImpl implements SubjectServices{
+public class SubjectServicesImpl implements SubjectServices {
 
     Subject subject = new Subject();
 
@@ -52,7 +52,7 @@ public class SubjectServicesImpl implements SubjectServices{
     @Override
     public List<Teacher> findAllTeachersBy(Long subjectId) {
         return teacherServices.findAll().stream().filter(teacher -> {
-            for(Subject subject : teacher.getSubject()){
+            for (Subject subject : teacher.getSubject()) {
                 return subject.getSubjectId().equals(subjectId);
             }
             return false;
@@ -62,7 +62,7 @@ public class SubjectServicesImpl implements SubjectServices{
     @Override
     public List<Student> findAllStudentsBy(Long subjectId) {
         return studentServices.findAll().stream().filter(student -> {
-            for(Subject subject : student.getSubject()){
+            for (Subject subject : student.getSubject()) {
                 return subject.getSubjectId().equals(subjectId);
             }
             return false;
@@ -72,7 +72,7 @@ public class SubjectServicesImpl implements SubjectServices{
     @Override
     public List<Class> findAllClassesBy(Long subjectId) {
         return classService.findAll().stream().filter(class1 -> {
-            for(Subject subject : class1.getSubject()){
+            for (Subject subject : class1.getSubject()) {
                 return subject.getSubjectId().equals(subjectId);
             }
             return false;
@@ -82,9 +82,9 @@ public class SubjectServicesImpl implements SubjectServices{
     @Override
     public void deleteStudentFromSubjectBy(Long studentId, Long subjectId) {
         Optional<Subject> subjectOptional = subjectRepository.findById(subjectId);
-        if(subjectOptional.isPresent()){
+        if (subjectOptional.isPresent()) {
             Student student = new Student();
-            if(student.getStudentId().equals(studentId)){
+            if (student.getStudentId().equals(studentId)) {
                 studentServices.deleteStudentBy(studentId);
             }
         }
