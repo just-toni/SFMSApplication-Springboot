@@ -1,7 +1,9 @@
 package com.sfms.schoolfilemanagementsystem.repository;
 
-import com.sfms.schoolfilemanagementsystem.model.Student;
-import com.sfms.schoolfilemanagementsystem.model.Teacher;
+import com.sfms.schoolfilemanagementsystem.data.model.Student;
+import com.sfms.schoolfilemanagementsystem.data.model.Teacher;
+import com.sfms.schoolfilemanagementsystem.data.repository.StudentRepository;
+import com.sfms.schoolfilemanagementsystem.data.repository.TeacherRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,14 +23,14 @@ class TeacherRepositoryTest {
     StudentRepository studentRepository;
 
     @Test
-    void createTeachers(){
-        LocalDate date1 = LocalDate.of(1989, 3,16);
+    void createTeachers() {
+        LocalDate date1 = LocalDate.of(1989, 3, 16);
         Teacher teacher1 = new Teacher("Tasha Daniels", date1);
-        LocalDate date2 = LocalDate.of(1991, 8,26);
+        LocalDate date2 = LocalDate.of(1991, 8, 26);
         Teacher teacher2 = new Teacher("Feraphina Junnsair", date2);
-        LocalDate date3 = LocalDate.of(1979, 6,10);
+        LocalDate date3 = LocalDate.of(1979, 6, 10);
         Teacher teacher3 = new Teacher("Marshal Peterson", date3);
-        LocalDate date4 = LocalDate.of(1990, 10,23);
+        LocalDate date4 = LocalDate.of(1990, 10, 23);
         Teacher teacher4 = new Teacher("Hera Zueser", date4);
         teacherRepository.save(teacher1);
         teacherRepository.save(teacher2);
@@ -38,14 +40,14 @@ class TeacherRepositoryTest {
     }
 
     @Test
-    void testThatTeachersHaveBeCreated(){
+    void testThatTeachersHaveBeCreated() {
         assertEquals(4, teacherRepository.count());
     }
 
     @Test
-    void testThatTeacherCanBeUpdatedById(){
+    void testThatTeacherCanBeUpdatedById() {
         Optional<Teacher> optionalTeacher = teacherRepository.findById(2L);
-        if(optionalTeacher.isPresent()){
+        if (optionalTeacher.isPresent()) {
             Teacher teacher = optionalTeacher.get();
             LocalDate date = LocalDate.of(1970, 5, 18);
             teacher.setDateOfBirth(date);
@@ -55,9 +57,9 @@ class TeacherRepositoryTest {
     }
 
     @Test
-    void testThatTeacherCanBeDeletedById(){
+    void testThatTeacherCanBeDeletedById() {
         Optional<Teacher> optionalTeacher = teacherRepository.findById(1L);
-        if(optionalTeacher.isPresent()){
+        if (optionalTeacher.isPresent()) {
             Teacher teacher = optionalTeacher.get();
             teacherRepository.delete(teacher);
             assertEquals(3, teacherRepository.count());
@@ -65,8 +67,8 @@ class TeacherRepositoryTest {
     }
 
     @Test
-    void testThatTeacherHasStudents(){
-        LocalDate date = LocalDate.of(1989, 3,16);
+    void testThatTeacherHasStudents() {
+        LocalDate date = LocalDate.of(1989, 3, 16);
         Teacher teacher1 = new Teacher("Tasha Daniels", date);
         teacherRepository.save(teacher1);
         LocalDate date1 = LocalDate.of(2003, 3, 1);

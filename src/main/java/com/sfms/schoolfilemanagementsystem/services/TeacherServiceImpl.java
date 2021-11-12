@@ -1,10 +1,10 @@
 package com.sfms.schoolfilemanagementsystem.services;
 
-import com.sfms.schoolfilemanagementsystem.model.Class;
-import com.sfms.schoolfilemanagementsystem.model.Student;
-import com.sfms.schoolfilemanagementsystem.model.Subject;
-import com.sfms.schoolfilemanagementsystem.model.Teacher;
-import com.sfms.schoolfilemanagementsystem.repository.TeacherRepository;
+import com.sfms.schoolfilemanagementsystem.data.model.Class;
+import com.sfms.schoolfilemanagementsystem.data.model.Student;
+import com.sfms.schoolfilemanagementsystem.data.model.Subject;
+import com.sfms.schoolfilemanagementsystem.data.model.Teacher;
+import com.sfms.schoolfilemanagementsystem.data.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class TeacherServiceImpl implements TeacherServices{
+public class TeacherServiceImpl implements TeacherServices {
     Teacher teacher = new Teacher();
 
     @Autowired
@@ -30,22 +30,22 @@ public class TeacherServiceImpl implements TeacherServices{
     private SubjectServices subjectServices;
 
     @Override
-    public Teacher registerWith(TeacherRegistrationDto teacherRegistrationDto){
+    public Teacher registerWith(TeacherRegistrationDto teacherRegistrationDto) {
         System.out.println(teacherRegistrationDto.getTeacherName());
         teacher.setName(teacherRegistrationDto.getTeacherName());
         teacher.setDateOfBirth(LocalDate.parse(teacherRegistrationDto.getDateOfBirth()));
         return teacherRepository.save(teacher);
     }
 
-    public void deleteBy(Long id){
+    public void deleteBy(Long id) {
         teacherRepository.deleteById(id);
     }
 
-    public List<Teacher> findAll(){
+    public List<Teacher> findAll() {
         return teacherRepository.findAll();
     }
 
-    public Optional<Teacher> findTeacherById(Long teacherId){
+    public Optional<Teacher> findTeacherById(Long teacherId) {
         return teacherRepository.findById(teacherId);
     }
 
@@ -85,7 +85,7 @@ public class TeacherServiceImpl implements TeacherServices{
     @Override
     public List<Student> findAllStudentsForTeacherBy(Long teacherId) {
         return studentServices.findAll().stream().filter(student -> {
-            for(Teacher teacher: student.getTeachers()){
+            for (Teacher teacher : student.getTeachers()) {
                 return teacher.getTeacherId().equals(teacherId);
             }
             return false;
@@ -95,7 +95,7 @@ public class TeacherServiceImpl implements TeacherServices{
     @Override
     public List<Subject> findAllSubjectsForTeacherBy(Long teacherId) {
         return subjectServices.findAll().stream().filter(subject -> {
-            for(Teacher teacher : subject.getTeacher()){
+            for (Teacher teacher : subject.getTeacher()) {
                 return teacher.getTeacherId().equals(teacherId);
             }
             return false;
@@ -105,7 +105,7 @@ public class TeacherServiceImpl implements TeacherServices{
     @Override
     public List<Class> findAllClassesForTeacherBy(Long teacherId) {
         return classService.findAll().stream().filter(class1 -> {
-            for(Teacher teacher : class1.getTeachers()){
+            for (Teacher teacher : class1.getTeachers()) {
                 return teacher.getTeacherId().equals(teacherId);
             }
             return false;

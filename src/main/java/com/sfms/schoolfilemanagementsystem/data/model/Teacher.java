@@ -1,4 +1,4 @@
-package com.sfms.schoolfilemanagementsystem.model;
+package com.sfms.schoolfilemanagementsystem.data.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +32,6 @@ public class Teacher {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "teacher_class", joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "class_id"))
-    Set<Class> classes;
+    Set<java.lang.Class> classes;
 
 }
