@@ -1,7 +1,6 @@
 package com.sfms.schoolfilemanagementsystem.repository;
 
-import com.sfms.schoolfilemanagementsystem.model.Parent;
-import com.sfms.schoolfilemanagementsystem.model.Teacher;
+import com.sfms.schoolfilemanagementsystem.data.model.Parent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,8 +15,9 @@ class ParentRepositoryTest {
 
     @Autowired
     ParentRepository parentRepository;
+
     @Test
-    void createParents(){
+    void createParents() {
         Parent parent1 = new Parent("Maura Reelwood");
         Parent parent2 = new Parent("Ben Scollof");
         LocalDate date1 = LocalDate.of(1976, 5, 25);
@@ -32,9 +32,9 @@ class ParentRepositoryTest {
     }
 
     @Test
-    void testThatParentCanBeUpdatedById(){
+    void testThatParentCanBeUpdatedById() {
         Optional<Parent> optionalParent = parentRepository.findById(2L);
-        if(optionalParent.isPresent()){
+        if (optionalParent.isPresent()) {
             Parent parent = optionalParent.get();
             parent.setName("Paul Scollof");
             parentRepository.save(parent);
@@ -43,9 +43,9 @@ class ParentRepositoryTest {
     }
 
     @Test
-    void testThatParentCanBeDeletedById(){
+    void testThatParentCanBeDeletedById() {
         Optional<Parent> optionalParent = parentRepository.findById(2L);
-        if(optionalParent.isPresent()){
+        if (optionalParent.isPresent()) {
             Parent parent = optionalParent.get();
             parentRepository.delete(parent);
             assertEquals(3, parentRepository.count());
